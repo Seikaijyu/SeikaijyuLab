@@ -3,6 +3,8 @@ package ml
 import (
 	"math"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGeneticAlgorithm(t *testing.T) {
@@ -27,11 +29,7 @@ func TestGeneticAlgorithm(t *testing.T) {
 			return sum / float64(len(chromosome))
 		},
 	})
-	got := int(math.Round(ga.Run()))
-	if got != want {
-		t.Errorf("Run() = %v, want %v", got, want)
-	} else {
-		t.Log("Run() = ", got)
-	}
+	got := int(math.Round(ga.Start()))
+	assert.Equal(t, want, got)
 
 }

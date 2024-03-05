@@ -14,8 +14,8 @@ type GeneticAlgorithm struct {
 
 // 遗传算法配置
 type GeneticAlgorithmProfile struct {
-	PopulationSize    int                                 // 种群大小
-	ChromosomeLength  int                                 // 染色体长度
+	PopulationSize    int                                 // 种群大小，代表一对个体
+	ChromosomeLength  int                                 // 染色体长度，代表一对染色体
 	MutationRate      float64                             // 变异率
 	CrossoverRate     float64                             // 交叉率
 	Generations       int                                 // 迭代次数
@@ -149,7 +149,7 @@ func (ga *GeneticAlgorithm) Mutation(chromosome []float64) []float64 {
 }
 
 // 运行遗传算法
-func (ga *GeneticAlgorithm) Run() float64 {
+func (ga *GeneticAlgorithm) Start() float64 {
 	// 初始化种群
 	ga.InitializePopulation()
 	// 通过迭代更新的方式来产生新的个体，最终产生一个适应度较高的个体，这个个体就是所求的最优解。

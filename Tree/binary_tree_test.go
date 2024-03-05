@@ -3,6 +3,8 @@ package tree
 import (
 	"sort"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestBinaryTree(t *testing.T) {
@@ -19,10 +21,16 @@ func TestBinaryTree(t *testing.T) {
 	// 排序
 	sort.Ints(list)
 	// 中序遍历
-	for i, v := range bt.InOrderTraversal() {
-		if v != list[i] {
-			t.Errorf("got %d, want %d", v, list[i])
-		}
-	}
+	bt.Each(func(idx int, value int) {
+		assert.Equal(t, value, list[idx])
+	})
+
+	bt.Delete(3)
+	list = []int{10, 5, 15, 8, 7, 20, 12, 18}
+	sort.Ints(list)
+	bt.Each(func(idx int, value int) {
+		assert.Equal(t, value, list[idx])
+	})
+	assert.Equal(t, bt.Search(5), true)
 
 }
