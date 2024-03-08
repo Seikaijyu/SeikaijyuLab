@@ -97,12 +97,10 @@ func (bt *BinaryTree[T]) deleteRecursive(node *Node[T], value T) *Node[T] {
 //	查找最小值，如果左节点为空，返回当前节点的值
 //	否则递归查找左节点
 func (bt *BinaryTree[T]) minValue(node *Node[T]) T {
-	minValue := node.Value
 	for node.Left != nil {
-		minValue = node.Left.Value
 		node = node.Left
 	}
-	return minValue
+	return node.Value
 }
 
 // 递归插入
