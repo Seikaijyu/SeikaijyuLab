@@ -1,4 +1,4 @@
-package ml
+package genetic_algorithm
 
 import (
 	"math"

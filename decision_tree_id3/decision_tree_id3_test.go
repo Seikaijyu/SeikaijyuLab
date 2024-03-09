@@ -1,4 +1,4 @@
-package ml
+package decision_tree_id3
 
 import (
 	"fmt"

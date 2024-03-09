@@ -1,4 +1,4 @@
-package ml
+package decision_tree_id3
 
 import (
 	"math"
@@ -45,9 +45,9 @@ type dataset struct {
 //	熵是用于衡量数据的不确定性，熵越高，数据越不稳定，信息增益越大
 //	信息增益越大，说明划分的效果越好
 //	除此之外还有其他决策树算法，比如 C4.5 算法和 CART 算法
-//	C4.5算法使用信息增益比来选择特征，但是它和ID3算法不同的是，它可以处理连续特征，CART 算法使用基尼不纯度来选择特征，它可以处理多分类任务
-//	C4.5算法的优点是可以处理连续特征，CART算法的优点是可以处理多分类任务
-//	C4.5算法的缺点是计算复杂度高，CART算法的缺点是不支持概率输出
+//	C4.5算法使用信息增益比来选择特征，不仅处理离散特征还可以处理连续特征
+//	CART 算法使用基尼不纯度来选择特征，它可以处理分类和回归任务（称为分类与回归树）
+//	C4.5算法和CART算法均能提供概率输出，CART算法的一个主要缺点是容易过拟合，而C4.5算法的计算复杂度较高
 //
 //	maxDepth 表示树的最大深度，用于防止过拟合
 //	minSamplesSplit 表示节点分裂所需的最小样本数
@@ -72,7 +72,7 @@ func NewDecisionTree(maxDepth, minSamplesSplit int) *DecisionTree {
 //
 // 其中 X 和 y 的长度应该相等
 func (dt *DecisionTree) Fit(X [][]float64, y []int) {
-	// 递归构建决策树
+	// 递归构建决策树，深度从0开始
 	dt.root = dt.buildTree(X, y, 0)
 }
 

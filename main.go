@@ -1,10 +1,8 @@
 package main
 
 import (
-	"encoding/gob"
 	"fmt"
 	"math/rand"
-	"os"
 	"time"
 
 	ml "github.com/Seikaijyu/SeikaijyuLab/ML"
@@ -57,39 +55,7 @@ func calculateAccuracy(predictions, labels []int) float64 {
 	}
 	return float64(correct) / float64(len(predictions))
 }
-func saveData(filename string, data ml.DecisionTree) error {
-	// 打开文件用于写入，如果不存在则创建，存在则清空后写入
-	file, err := os.Create(filename)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
 
-	// 创建gob编码器并将数据编码到文件
-	encoder := gob.NewEncoder(file)
-	if err := encoder.Encode(data); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func loadData(filename string, data *ml.DecisionTree) error {
-	// 打开文件用于读取
-	file, err := os.Open(filename)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	// 创建gob解码器并从文件解码到结构体
-	decoder := gob.NewDecoder(file)
-	if err := decoder.Decode(data); err != nil {
-		return err
-	}
-
-	return nil
-}
 func main() {
 	// 生产训练数据，格式为
 	// [
@@ -98,6 +64,7 @@ func main() {
 	//	...
 	// ]
 	X_train := generateRandomData(1000, 1, 100)
+	// 将训练数据转换为二进制数据
 	Y_train := convertToBinaryData(X_train, 50)
 
 	// 创建决策树
@@ -105,8 +72,6 @@ func main() {
 
 	// 训练决策树
 	tree.Fit(X_train, Y_train)
-	saveData("tree.gob", *tree)
-	loadData("tree.gob", tree)
 	// 生成测试数据
 	X_test := generateRandomData(100, 1, 100)
 	// 将测试数据转换为二进制数据

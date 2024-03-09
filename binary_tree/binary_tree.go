@@ -1,4 +1,4 @@
-package tree
+package binary_tree
 
 // 非平衡二叉树实现
 

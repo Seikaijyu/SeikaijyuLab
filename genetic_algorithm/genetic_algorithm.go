@@ -1,4 +1,4 @@
-package ml
+package genetic_algorithm
 
 // 遗传算法实现
 import (
