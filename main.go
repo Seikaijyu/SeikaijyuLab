@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	ml "github.com/Seikaijyu/SeikaijyuLab/ML"
+	"github.com/Seikaijyu/SeikaijyuLab/decision_tree_id3"
 )
 
 var randSource = rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -68,7 +68,7 @@ func main() {
 	Y_train := convertToBinaryData(X_train, 50)
 
 	// 创建决策树
-	tree := ml.NewDecisionTree(3, 2)
+	tree := decision_tree_id3.NewDecisionTree(3, 2)
 
 	// 训练决策树
 	tree.Fit(X_train, Y_train)
